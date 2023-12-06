@@ -4,6 +4,18 @@ import { useLoaderData } from '@remix-run/react';
 
 import { H2 } from '~/components/headings';
 
+const data = [
+  { id: 1, title: 'Food', amount: 100 },
+  { id: 2, title: 'Transport', amount: 100 },
+  { id: 3, title: 'Entertainment', amount: 100 },
+];
+
+export function loader({ params }: LoaderFunctionArgs) {
+  const { id } = params;
+  const expense = data.find((expense) => expense.id === Number(id));
+  if (!expense) throw new Response('Not found', { status: 400 });
+  return json(expense);
+}
 export default function Component() {
   const expense = useLoaderData<typeof loader>();
   return (
@@ -13,16 +25,3 @@ export default function Component() {
     </div>
   );
 }
-
-export function loader({ params }: LoaderFunctionArgs) {
-  const { id } = params;
-  const expense = data.find((expense) => expense.id === Number(id));
-  if (!expense) throw new Response('Not found', { status: 404 });
-  return json(expense);
-}
-
-const data = [
-  { id: 1, title: 'Food', amount: 100 },
-  { id: 2, title: 'Transport', amount: 100 },
-  { id: 3, title: 'Entertainment', amount: 100 },
-];

@@ -1,3 +1,5 @@
+import { Outlet } from '@remix-run/react';
+
 import { H1 } from '~/components/headings';
 
 export default function Component() {
@@ -9,19 +11,28 @@ export default function Component() {
           <h2 className="sr-only">All expenses</h2>
           <ul className="flex flex-col">
             <li>
-              <p className="text-xl font-semibold">Food</p>
-              <p>$100</p>
-              <li>
-                <p className="text-xl font-semibold">Transport</p>
+              <a href="/dashboard/incomes/1">
+                <p className="text-xl font-semibold">Food</p>
                 <p>$100</p>
-                <li>
-                  <p className="text-xl font-semibold">Entertainment</p>
+              </a>
+
+              <li>
+                <a href="/dashboard/incomes/2">
+                  <p className="text-xl font-semibold">Transport</p>
                   <p>$100</p>
+                </a>
+
+                <li>
+                  <a href="/dashboard/incomes/3">
+                    <p className="text-xl font-semibold">Entertainment</p>
+                    <p>$100</p>
+                  </a>
                 </li>
               </li>
             </li>
           </ul>
         </section>
+        <Outlet />
       </div>
     </div>
   );
