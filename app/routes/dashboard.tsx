@@ -1,6 +1,7 @@
-import { Outlet } from '@remix-run/react';
+import { Link as Remixlink, Outlet } from '@remix-run/react';
 
 import { Container } from '~/components/containers';
+import { NavLink } from '~/components/links';
 
 export default function Component() {
   return (
@@ -10,18 +11,18 @@ export default function Component() {
           <nav>
             <ul className="w-full flex flex-row gap-5 font-bold text-lg lg:text-2*1">
               <li>
-                <a href="/">Bee Rich</a>
+                <Remixlink to="/">Bee Rich</Remixlink>
               </li>
               <li className="ml-auto">
-                <a href="/404">Log out</a>
+                <Remixlink to="/404">Log out</Remixlink>
               </li>
             </ul>
             <ul className="mt-10 w-full flex flex-row gap-5">
               <li className="ml-auto">
-                <a href="/dashboard/income">Income</a>
+                <NavLink to="/dashboard/incomes">Incomes</NavLink>
               </li>
               <li className="mr-auto">
-                <a href="/dashboard/expense">Expense</a>
+                <NavLink to="/dashboard/expenses">Expenses</NavLink>
               </li>
             </ul>
           </nav>

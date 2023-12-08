@@ -1,8 +1,12 @@
-import { Outlet } from '@remix-run/react';
+import { Outlet, useNavigation } from '@remix-run/react';
+import { clsx } from 'clsx';
 
 import { H1 } from '~/components/headings';
+import { ListLinkItem } from '~/components/links';
 
 export default function Component() {
+  const navigation = useNavigation();
+  console.log(navigation.state);
   return (
     <div className="w-full">
       <H1>Your expenses</H1>
@@ -11,26 +15,28 @@ export default function Component() {
           <h2 className="sr-only">All expenses</h2>
           <ul className="flex flex-col">
             <li>
-              <a href="/dashboard/expenses/1">
+              <ListLinkItem to="/dashboard/expenses/1">
                 <p className="text-xl font-semibold">Food</p>
                 <p>$100</p>
-              </a>
+              </ListLinkItem>
               <li>
-                <a href="/dashboard/expenses/2">
+                <ListLinkItem to="/dashboard/expenses/2">
                   <p className="text-xl font-semibold">Transport</p>
                   <p>$100</p>
-                </a>
+                </ListLinkItem>
                 <li>
-                  <a href="/dashboard/expenses/3">
+                  <ListLinkItem to="/dashboard/expenses/3">
                     <p className="text-xl font-semibold">Entertainment</p>
                     <p>$100</p>
-                  </a>
+                  </ListLinkItem>
                 </li>
               </li>
             </li>
           </ul>
         </section>
-        <Outlet />
+        <section className={clsx('lg:p-8 w-full', navigation.state === 'loading' && 'motion-safe:animate-pulse')}>
+          <Outlet />
+        </section>
       </div>
     </div>
   );
